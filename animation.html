@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Magical Animations</h1>
+        <p class="fade-in delay-1">Watch the magic unfold!</p>
+        <div class="animation-container fade-in delay-2">
+            <button id="fireworks-btn" class="btn">Launch Fireworks</button>
+            <button id="hearts-btn" class="btn">Shower Hearts</button>
+            <button id="sparkles-btn" class="btn">Add Sparkles</button>
+        </div>
+        <div id="animation-area" class="animation-area">
+
+            <div id="message" class="animated-messaSS OF SIKHA &YE JITENDRA  27/11/2014 MAY U BOTH HAVE MILLION OF SMILE LAUGHTER JOY TOHETHER  TUMHARA  SHADI M JO PAHNA THA ABHI TAK VO PATIALA  SMBHAL KE RAKHA H  ABHI BHI ATA JATA H  11 SAAL USKO BHI PURA HO GYA  LOTS OF LOVE  MASI    </div>
+        </div>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="memories.html" class="btn">Our Memories</a>
+            <a href="wishes.html" class="btn">Reveal Wishes</a>
+            <a href="love.html" class="btn">Love Page</a>
+            <a href="game.html" class="btn">Play Game</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('fireworks-btn').addEventListener('click', launchFireworks);
+        document.getElementById('hearts-btn').addEventListener('click', showerHearts);
+        document.getElementById('sparkles-btn').addEventListener('click', addSparkles);
+
+        function launchFireworks() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    animationArea.appendChild(firework);
+                    setTimeout(() => firework.remove(), 2000);
+                }, i * 200);
+            }
+        }
+
+        function showerHearts() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'shower-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    animationArea.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function addSparkles() {
+            const animationArea = document.getElementById('animation-area');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    animationArea.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1500);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>

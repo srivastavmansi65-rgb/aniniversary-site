@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Quiz Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="golden-fireworks"></div>
+    <div class="floating-hearts"></div>
+    <div class="romantic-messages"></div>
+    <div class="container">
+        <h1 class="fade-in">Love Quiz</h1>
+        <p class="fade-in delay-1">Test your knowledge about our love story!</p>
+        <div id="quiz-container" class="fade-in delay-2">
+            <div id="question">Question will appear here</div>
+            <div id="options"></div>
+            <button id="next-btn" class="btn" style="display: none;">Next</button>
+        </div>
+        <div id="result" style="display: none;">
+            <h2>Your Score: <span id="score">0</span>/5</h2>
+            <p id="message"></p>
+            <button id="restart-btn" class="btn">Play Again</button>
+        </div>
+        <div class="hearts">
+            <span class="heart">❤️</span>
+            <span class="heart delay-2">❤️</span>
+            <span class="heart delay-3">❤️</span>
+            <span class="heart delay-4">❤️</span>
+            <span class="heart delay-5">❤️</span>
+        </div>
+        <div class="nav-links fade-in delay-4">
+            <a href="index.html" class="btn">Back to Home</a>
+            <a href="memories.html" class="btn">Our Memories</a>
+            <a href="wishes.html" class="btn">Reveal Wishes</a>
+            <a href="love.html" class="btn">Love Page</a>
+            <a href="animation.html" class="btn">Animations</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "What was our first date?",
+                options: ["Movie night", "Picnic in the park", "Dinner at a fancy restaurant", "Beach walk"],
+                answer: 1
+            },
+            {
+                question: "What's my favorite color?",
+                options: ["Blue", "Red", "Green", "Purple"],
+                answer: 1
+            },
+            {
+                question: "Where did we first say 'I love you'?",
+                options: ["Under the stars", "At home", "During a trip", "On the phone"],
+                answer: 0
+            },
+            {
+                question: "What's our favorite shared hobby?",
+                options: ["Cooking", "Dancing", "Reading", "Watching movies"],
+                answer: 3
+            },
+            {
+                question: "How many years have we been together?",
+                options: ["1", "2", "3", "Forever"],
+                answer: 3
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionEl = document.getElementById('question');
+            const optionsEl = document.getElementById('options');
+            const nextBtn = document.getElementById('next-btn');
+
+            questionEl.textContent = questions[currentQuestion].question;
+            optionsEl.innerHTML = '';
+
+            questions[currentQuestion].options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option-btn btn';
+                button.onclick = () => selectOption(index);
+                optionsEl.appendChild(button);
+            });
+
+            nextBtn.style.display = 'none';
+        }
+
+        function selectOption(selectedIndex) {
+            const options = document.querySelectorAll('.option-btn');
+            options.forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === questions[currentQuestion].answer) {
+                score++;
+                options[selectedIndex].style.backgroundColor = '#4CAF50';
+            } else {
+                options[selectedIndex].style.backgroundColor = '#f44336';
+                options[questions[currentQuestion].answer].style.backgroundColor = '#4CAF50';
+            }
+
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-container').style.display = 'none';
+            const resultEl = document.getElementById('result');
+            resultEl.style.display = 'block';
+            document.getElementById('score').textContent = score;
+
+            let message = '';
+            if (score === 5) {
+                message = "Perfect! You know me so well! ❤️";
+            } else if (score >= 3) {
+                message = "Great job! Our love is strong! 💕";
+            } else {
+                message = "Don't worry, every day is a chance to learn more about each other! 😊";
+            }
+            document.getElementById('message').textContent = message;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            loadQuestion();
+        }
+
+        document.getElementById('next-btn').addEventListener('click', nextQuestion);
+        document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+
+        loadQuestion();
+    </script>
+</body>
+</html>
